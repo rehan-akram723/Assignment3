@@ -46,3 +46,35 @@ class DvcReproductionGuide(BaseModel):
     instructions: List[str]
     git_command: str
     dvc_command: str
+
+
+class MlflowRunSummary(BaseModel):
+    run_id: str
+    run_name: Optional[str] = None
+    status: str
+    start_time: Optional[int] = None
+    metrics: Dict[str, float] = Field(default_factory=dict)
+    params: Dict[str, str] = Field(default_factory=dict)
+    tags: Dict[str, str] = Field(default_factory=dict)
+
+
+class MlflowBestRunResult(BaseModel):
+    best_run_id: str
+    metric_name: str
+    metric_value: float
+    reasoning: str
+    is_production_ready: bool
+    warnings: List[str] = Field(default_factory=list)
+
+
+class MlflowComparison(BaseModel):
+    runs: List[Dict[str, Any]]
+    metrics_compared: List[str]
+    analysis: str
+
+
+class ModelRegistryInfo(BaseModel):
+    model_name: str
+    latest_versions: List[Dict[str, Any]]
+
+

@@ -35,6 +35,7 @@ htmlcov/
 
 # MLOps & Tracking
 mlruns/
+*.db
 .dvc/cache
 .dvc/tmp
 
