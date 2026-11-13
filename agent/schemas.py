@@ -78,3 +78,46 @@ class ModelRegistryInfo(BaseModel):
     latest_versions: List[Dict[str, Any]]
 
 
+class AirflowDagSummary(BaseModel):
+    dag_id: str
+    description: Optional[str] = None
+    is_paused: bool
+    is_active: bool
+
+
+class AirflowDagRunStatus(BaseModel):
+    dag_id: str
+    dag_run_id: str
+    state: str
+    execution_date: Optional[str] = None
+    start_date: Optional[str] = None
+    end_date: Optional[str] = None
+
+
+class AirflowTriggerResult(BaseModel):
+    dag_id: str
+    dag_run_id: str
+    message: str
+    state: str
+
+
+class AirflowTaskFailure(BaseModel):
+    dag_id: str
+    dag_run_id: str
+    task_id: str
+    state: str
+    try_number: int
+    start_date: Optional[str] = None
+    end_date: Optional[str] = None
+
+
+class AirflowFailureDiagnostics(BaseModel):
+    dag_id: str
+    dag_run_id: str
+    task_id: str
+    error_message: str
+    logs_snippet: str
+    recommended_fix: str
+
+
+
