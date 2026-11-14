@@ -33,6 +33,10 @@ class CustomerFeatures(BaseModel):
     total_charges: float
 
 
+class AgentQueryRequest(BaseModel):
+    query: str
+
+
 @app.get("/")
 def root():
     return {"service": APP_NAME, "status": "running"}
@@ -80,3 +84,16 @@ def predict(features: CustomerFeatures):
         "churn_risk": "High" if pred == 1 else "Low",
         "model_version": APP_VERSION
     }
+
+
+@app.post("/agent/query")
+def agent_query(req: AgentQueryRequest):
+    try:
+        from agent.orchestrator import MLOpsAgentOrchestrator
+        orchestrator = MLOpsAgentOrchestrator()
+        res = orchestrator.process_query(req.query)
+        return res
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Agent error: {str(e)}")
+
+

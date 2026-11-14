@@ -165,5 +165,26 @@ class K8sClusterOperationResult(BaseModel):
     message: str
 
 
+class EvidenceRecord(BaseModel):
+    tool_name: str
+    category: str
+    success: bool
+    duration_ms: float
+    data: Dict[str, Any] = Field(default_factory=dict)
+    error: Optional[str] = None
+
+
+class AgentResponse(BaseModel):
+    query: str
+    answer: str
+    known_facts: List[str]
+    uncertainties: List[str]
+    recommended_actions: List[str]
+    retraining_recommended: bool
+    retraining_justification: Optional[str] = None
+    evidence: List[EvidenceRecord]
+
+
+
 
 

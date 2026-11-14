@@ -48,11 +48,11 @@ def _run_cmd(cmd: List[str]) -> subprocess.CompletedProcess:
 def _compute_md5(file_path: str) -> str:
     if not os.path.exists(file_path):
         return ""
-    hasher = hashlib.md5()
     with open(file_path, "rb") as f:
-        while chunk := f.read(8192):
-            hasher.update(chunk)
-    return hasher.hexdigest()
+        content = f.read()
+    # normalize CRLF to LF for cross-platform consistency
+    content = content.replace(b"\r\n", b"\n")
+    return hashlib.md5(content).hexdigest()
 
 
 def _get_git_commit() -> str:
