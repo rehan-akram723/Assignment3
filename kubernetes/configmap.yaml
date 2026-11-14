@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: inference-api-config
+  namespace: mlops
+  labels:
+    app: churn-inference-api
+data:
+  APP_NAME: "churn-inference-api"
+  APP_ENV: "production"
+  APP_VERSION: "v1.2.0"
+  MODEL_NAME: "churn_prediction"
+  LOG_LEVEL: "INFO"
+  PORT: "8000"

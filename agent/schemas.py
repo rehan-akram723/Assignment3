@@ -120,4 +120,50 @@ class AirflowFailureDiagnostics(BaseModel):
     recommended_fix: str
 
 
+class K8sPodSummary(BaseModel):
+    name: str
+    namespace: str
+    phase: str
+    ready: bool
+    restarts: int
+    pod_ip: Optional[str] = None
+    node_name: Optional[str] = None
+
+
+class K8sDeploymentSummary(BaseModel):
+    name: str
+    namespace: str
+    replicas: int
+    ready_replicas: int
+    updated_replicas: int
+    available_replicas: int
+    image: str
+
+
+class K8sServiceSummary(BaseModel):
+    name: str
+    namespace: str
+    type: str
+    cluster_ip: str
+    ports: List[Dict[str, Any]]
+
+
+class K8sUnhealthyPod(BaseModel):
+    name: str
+    namespace: str
+    phase: str
+    reason: str
+    restart_count: int
+    message: str
+
+
+class K8sClusterOperationResult(BaseModel):
+    success: bool
+    operation: str
+    target: str
+    requires_confirmation: bool = False
+    message: str
+
+
+
 
