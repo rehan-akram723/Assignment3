@@ -52,11 +52,18 @@ Unlike basic conversational bots that hallucinate operational metrics, this agen
 │   └── service.yaml               # ClusterIP service exposing inference API
 ├── tests/
 │   ├── __init__.py
+│   ├── conftest.py                # Session fixtures seeding MLflow test runs
 │   ├── test_airflow_tools.py      # Airflow connection, unauthorized DAG, & mock tests
 │   ├── test_dvc_tools.py          # DVC tracking, change detection, & command guards
 │   ├── test_kubernetes_tools.py   # K8s offline handling, namespace safety, & mocks
 │   ├── test_mlflow_tools.py       # MLflow experiment querying & run comparison tests
 │   └── test_orchestrator.py       # Multi-tool scenario, anti-hallucination, & safety tests
+├── screenshots/
+│   ├── 01_dvc_provenance.png      # DVC data lineage & cryptographic hash verification
+│   ├── 02_mlflow_experiments.png  # MLflow tracking dashboard & run comparisons
+│   ├── 03_airflow_pipeline.png    # Airflow DAG graph & task execution status
+│   ├── 04_kubernetes_deployment.png # Pods, service routing, & health probes
+│   └── 05_agent_multitool_reasoning.png # Terminal agent execution & evidence output
 ├── training/
 │   ├── __init__.py
 │   └── train.py                   # Model training script logging metrics & DVC provenance
@@ -65,6 +72,7 @@ Unlike basic conversational bots that hallucinate operational metrics, this agen
 ├── pyproject.toml                 # Project metadata and test configuration
 ├── requirements.txt               # Pinned Python dependencies
 ├── architecture.md                # System architecture document & Mermaid diagrams
+├── report.md                      # Comprehensive technical report & evidence defense
 └── README.md                      # Setup guide, technical report, & scenario defenses
 ```
 
@@ -143,6 +151,8 @@ pytest -v
 ---
 
 ## 5. Technical Report & Engineering Defense
+
+> A standalone copy of this technical report with embedded screenshots and complete scenario defenses is available in [report.md](report.md).
 
 ### 5.1 System Architecture & Tool Definitions
 The agent maintains a registry of 20+ specialized tools across four functional pillars:
